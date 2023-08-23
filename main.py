@@ -27,6 +27,7 @@ class MainWindow(QMainWindow):
         help_menu_item.addAction(about_action)
         # For Mac PC
         about_action.setMenuRole(QAction.MenuRole.NoRole)
+        about_action.triggered.connect(self.about)
 
         search_action = QAction(QIcon("icons/search.png"), "Search", self)
         search_action.triggered.connect(self.search)
@@ -96,6 +97,20 @@ class MainWindow(QMainWindow):
     def delete(self):
         dialog = DeleteDialog()
         dialog.exec()
+
+    def about(self):
+        dialog = AboutDialog()
+        dialog.exec()
+
+
+class AboutDialog(QMessageBox):
+    def __init__(self):
+        super().__init__()
+        content = """
+        This app was create during the course 'The Python Mega Course'.
+        Fell free to modify and reuse this app.
+        """
+        self.setText(content)
 
 
 class EditDialog(QDialog):
